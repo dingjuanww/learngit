@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link rel="stylesheet" href="/tpl/test/css/css-server/vue-test-0393b50bee.min.css">
+    <script type="text/javascript" src="/tpl/test/js/special.js"></script>
+    <style>
+        li.active{border-bottom:1px solid red;}
+    </style>
+</head>
+<body>
+
+    <div id="demo" class="demo-test" v-bind:class="{ 'class-a': isA, 'class-b': isB }">
+        <h1>{{title | uppercase}}</h1>
+        <button v-bind:disabled="someThing=true" v-on:click="disabled()">button</button>
+        <input v-model="newTodo" v-on:keyup.enter="addTodo" />
+        <ul class="">
+            <li v-for="todo in todos">
+                <span>{{todo.content}}</span>
+                <button v-on:click="removeTodo($index)">X</button>
+            </li>
+        </ul>
+        <img v-bind:src="src" width="100%" />
+        <div class="special-div">
+            <ul class="ul-div">
+                <li v-for="list in lists" track-by="$index" :class="list.actived ? 'active':''" v-on:click="changed($index)">{{list.name}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!--组件-->
+    <div id="app">
+        <couser heading="likes" color="green"></couser>
+        <couser heading="unlikes" color="red"></couser>
+    </div>
+    <template id="template-couser">
+        <h1>{{heading}}</h1>
+        <button @click="count += 1">{{count}}}</button>
+        <!--<button @click="count += 1" style="background:{{color}}">{{count}}}</button>-->
+    </template>
+    <!--组件-->
+
+    <!--ajax-->
+    <div id="testajax">
+         <ul>
+             <li v-for="item of items">
+                 <span>{{item.name}}</span>
+             </li>
+         </ul>
+    </div>
+
+    <script type="text/javascript" src="/tpl/test/js/vue/vue.js"></script>
+    <script type="text/javascript" src="/tpl/test/js/vue/vue-resource.js"></script>
+    <script type="text/javascript" src="/tpl/test/js/vue/test/test-server/vue-test-2fa15b8cb4.min.js"></script>
+</body>
+</html>

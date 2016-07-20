@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta content="telephone=no" name="format-detection"><meta content="email=no" name="format-detection"><script type="text/javascript" src="/skin/distribution/js/lib/vue/vue.js"></script><script type="text/javascript" src="/skin/distribution/js/lib/vue/vue-resource.js"></script><style>.expand-transition {
+            transition: all .3s ease;
+            height: 30px;
+            padding: 10px;
+            background-color: #eee;
+            overflow: hidden;
+        }
+        .expand-enter, .expand-leave {
+            height: 0;
+            padding: 0 10px;
+            opacity: 0;
+        }</style></head><body><div id="demo"><div v-show="show" transition="expand" expand="100">hello</div><button @click="show = !show">Toggle</button></div><script>new Vue({
+        el: '#demo',
+        data: {
+            show: true
+        },
+        transitions: {
+            expand: {
+                beforeEnter: function (el) {
+                    el.textContent = 'beforeEnter'
+                },
+                enter: function (el) {
+                    el.textContent = 'enter'
+                },
+                afterEnter: function (el) {
+                    el.textContent = 'afterEnter'
+                },
+                beforeLeave: function (el) {
+                    el.textContent = 'beforeLeave'
+                },
+                leave: function (el) {
+                    el.textContent = 'leave'
+                },
+                afterLeave: function (el) {
+                    el.textContent = 'afterLeave'
+                }
+            }
+        }
+    })</script></body></html>

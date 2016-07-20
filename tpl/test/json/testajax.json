@@ -1,0 +1,18 @@
+{
+  "data" : {
+      "memberMsg":[
+        {
+         "name":"zhangsan",
+          "id":10001
+        },
+        {
+          "name":"lisi",
+          "id":10002
+        },
+        {
+          "name":"wangwu",
+          "id":10003
+        }
+      ]
+  }
+}
