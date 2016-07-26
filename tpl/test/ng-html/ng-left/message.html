@@ -1,0 +1,13 @@
+<div class="ng-left">
+    <div class="left-tab">
+        <div class="ng-list">
+            <div class="list-div">消息管理</div>
+            <ul class="list-ul" ng-click="messageLi($event)">
+                <li data-msg="wx" ng-class="{'wx':'nativeColor'}[msgLi]">微信消息</li>
+                <li data-msg="iphone" ng-class="{'iphone':'nativeColor'}[msgLi]">手机白马消息</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="ng-right" ui-view></div>

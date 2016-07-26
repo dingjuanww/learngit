@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="indexTest">
+<head>
+   <meta charset="UTF-8">
+   <title>现在用父级、子级的controller来实现跳页面</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+   <meta content="telephone=no" name="format-detection"/>
+   <meta content="email=no" name="format-detection"/>
+   <link rel="stylesheet" href="/skin/distribution/css/special.css">
+   <link rel="stylesheet" href="/tpl/test/css/ng-index.css">
+   <script type="text/javascript" src="/skin/js/AngularJS-1.4.1/js/angular.js"></script>
+   <script type="text/javascript" src="/skin/js/AngularJS-1.4.1/js/angular-ui-router.min.js"></script>
+   <script type="text/javascript" src="/skin/js/AngularJS-1.4.1/js/angular-animate.js"></script>
+</head>
+<body ng-controller="indexCtr">
+   <div class="ng-index" ng-controller="parentCtr">
+       <!--通过父级controller点击事件发送一个方法，让子级controller接收，然后子级展示出视图------------->
+       <div id="ng-head" class="ng-head">
+           <ul class="indexUl" ng-click="changeLi($event)">
+              <li data-id="message" ng-class="{'message':'nativeColor'}[status]">消息</li>
+              <li data-id="member"  ng-class="{'member':'nativeColor'}[status]">客户</li>
+              <li data-id="goods" ng-class="{'goods':'nativeColor'}[status]">商品</li>
+              <li data-id="orders" ng-class="{'orders':'nativeColor'}[status]">订单</li>
+           </ul>
+       </div>
+       <!--这里会定义一个子级controller，来接收父级传过来的方法，并展示出视图---->
+       <div id="ng-left" ui-view></div>
+
+   </div>
+   <script type="text/javascript" src="/tpl/test/js/ng/test/ng-indexModul.js"></script>
+   <script type="text/javascript" src="/tpl/test/js/ng/test/ng-indexCtr.js"></script>
+</body>
+</html>

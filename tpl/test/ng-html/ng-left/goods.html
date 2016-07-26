@@ -1,0 +1,13 @@
+<div class="ng-left">
+    <div class="left-tab">
+        <div class="ng-list">
+            <div class="list-div">商品管理</div>
+            <ul class="list-ul" ng-click="goodsCha($event)">
+                <li data-god="chu" ng-class="{'chu':'nativeColor'}[godsLi]">出售中的商品</li>
+                <li data-god="yi" ng-class="{'yi':'nativeColor'}[godsLi]">已售罄的商品</li>
+                <li data-god="ku" ng-class="{'ku':'nativeColor'}[godsLi]">仓库中的商品</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="ng-right" ui-view></div>

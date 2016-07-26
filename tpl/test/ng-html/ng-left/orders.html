@@ -1,0 +1,14 @@
+<div class="ng-left">
+    <div class="left-tab">
+        <div class="ng-list">
+            <div class="list-div">订单管理</div>
+            <ul class="list-ul" ng-click="orderCha($event)">
+                <li data-ord="all" ng-class="{'all':'nativeColor'}[ordLi]">所有订单</li>
+                <li data-ord="store" ng-class="{'store':'nativeColor'}[ordLi]">微商城订单</li>
+                <li data-ord="iphone" ng-class="{'iphone':'nativeColor'}[ordLi]">手机白马订单</li>
+                <li data-ord="tai" ng-class="{'tai':'nativeColor'}[ordLi]">收银台订单</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="ng-right" ui-view></div>
