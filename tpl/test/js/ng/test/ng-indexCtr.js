@@ -5,9 +5,6 @@ indexModule.controller('indexCtr',['$scope',function($scope){
 
 indexModule.controller('parentCtr',['$scope','$state','$location','$$receiveTopTab',function($scope,$state,$location,$$receiveTopTab){
     $scope.status = 'member';
-    $scope.$on('to-child',function(event,data){
-        $scope.status = data;
-    });
     $scope.changeLi = function(e){
         var e = e.target;
         if(e.nodeName != "LI")return;

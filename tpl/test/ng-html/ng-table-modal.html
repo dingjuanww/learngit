@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="modalTest">
+<head>
+   <meta charset="UTF-8">
+   <title>ng模态框</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+   <meta content="telephone=no" name="format-detection"/>
+   <meta content="email=no" name="format-detection"/>
+   <link rel="stylesheet" href="/skin/distribution/css/special.css">
+   <link rel="stylesheet" href="/skin/css/bootstrap/bootstrap.min.css">
+   <script type="text/javascript" src="/skin/js/AngularJS-1.4.1/js/angular.js"></script>
+   <style>
+      body{background:#fff;}
+      .ng-head{width:100%;height:50px;line-height:50px;border-bottom:1px solid #ddd;}
+      .td-img img{width:20%;}
+      /*alert弹框*/
+      .afaAlert{position:fixed;width:80%;top:30%;left:10%;text-align:center;transition:.8s all;}
+      .afaAlert.ng-hide-add{opacity:1;}
+      .afaAlert.ng-hide-add-active{opacity:0;}
+      .afaAlert.ng-hide-remove{opacity:0;}
+      .afaAlert.ng-hide-remove-active{opacity:1;}
+   </style>
+</head>
+<body ng-controller="modalCtr">
+     <div class="ng-head"></div>
+     <table class="common-group" id="table-list">
+        <thead>
+           <tr class="common-group-tr">
+              <td>客户头像</td>
+              <td>客户姓名</td>
+              <td>手机号</td>
+              <td>客户来源</td>
+              <td>客户等级</td>
+              <td>客户状态</td>
+              <td>操作记录</td>
+           </tr>
+        </thead>
+        <tbody ng-repeat="list in lists">
+           <tr>
+              <td class="td-img"><img ng-src="{{list.image}}" /></td>
+              <td ng-bind="list.name"></td>
+              <td ng-bind="list.phone"></td>
+              <td ng-bind="list.style"></td>
+              <td ng-bind="list.level"></td>
+              <td ng-bind="list.status"></td>
+              <!--<td><a href="" class="modal-detail" ng-click="showDetail($event,list.id)">查看详情</a>&nbsp;&nbsp;<a href="" class="popover-detail" uib-title="" uib-popover-html="dynamicPopover.template">删除</a></td>-->
+              <td><a href="" class="modal-detail" ng-click="showDetail($event,list.id)">查看详情</a>&nbsp;&nbsp;<popover-cancel text="删除" placement="left" cancel-text="确认删除吗？" confirm="confirm('top')" cancel="cancel()" has-confirm-close-pop="" has-cancel-close-pop="" pop-width=""></popover-cancel><a href="" ng-click="addAlert()">测试alert框</a></td>
+           </tr>
+        </tbody>
+     </table>
+     <!--alert弹框-->
+     <alert-msg message="text" show="hasDataShow"></alert-msg>
+
+     <!--底部分页-->
+     <page-nation conf="conf"></page-nation>
+
+     <script type="text/javascript" src="/skin/js/AngularJS-1.4.1/js/ui-bootstrap/angular-ui-bootstrap-tpls.min.js"></script>
+     <script type="text/javascript" src="/skin/js/AngularJS-1.4.1/js/angular-animate.js"></script>
+     <script type="text/javascript" src="/tpl/test/js/ng/test/ng-table-modul.js"></script>
+     <script type="text/javascript" src="/tpl/test/js/ng/test/ng-table-modal.js"></script>
+</body>
+</html>
