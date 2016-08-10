@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+   <head>
+       <meta charset="UTF-8">
+       <title>深入了解指令directive中的的scope</title>
+       <script type="text/javascript" src="/skin/js/AngularJS-1.4.1/js/angular.js"></script>
+   </head>
+   <body>
+       <div ng-controller="mainController">
+           <div>父亲：{{name}}<input type="text" ng-model="name" /></div>
+           <div my-directive message="我是自定义内容" colors="change()"></div>
+           <!--<msg my-directive></msg>-->
+           <br/>
+           <br/>
+           <br/>
+           <br/>
+           <!--专门为了测试scope中的'='-->
+           <div>父级：{{textMsg}}<input type="text" ng-model="textMsg" ng-click="showInput()" /></div>
+           <msg childmsg="_message" showdata="show"></msg>
+       </div>
+   </body>
+   <script>
+       var app = angular.module('myApp',[]);
+       app.controller('mainController',['$scope',function($scope){  //父级controller
+           $scope.name="蓝胖子";
+           console.log($scope.msg); //父级作用域是找不到msg的，因为子作用域通过scope{}不继承并且隔离了父作用域
+           $scope.change = function(){
+               console.log("我改变了颜色");
+           };
+
+           //专门为了测试scope中的'='
+           $scope._message = "我是为了测试scope中的‘=’";
+           $scope.show = false;
+           $scope.showInput = function(){
+               $scope.show = true;
+           };
+       }]);
+       //my-directive属性指令
+       app.directive('myDirective',function(){
+            return {
+                restrict:'EA',
+                template:'<div>儿子：{{msg}}<input type="text" ng-model="msg" ng-click="changeColor($event)" />' +
+                '</div>',
+                replace:true,
+//                scope:false  //为false就是儿子继承父亲的值，改变父亲的值，儿子的值也随之变化，反之亦如此。（继承不隔离）
+//                scope:true   //为true就是儿子继承父亲的值，改变父亲的值，儿子的值随之变化，但是改变儿子的值，父亲的值不变。（继承隔离）
+//                以上两种情况，template中的变量一定要为name，跟父亲同名，不然实现不了继承
+//                scope:{}  //没有继承父亲的值，所以儿子的值为空，改变任何一方的值均不能影响另一方的值。（不继承隔离），那么此时template中的name就可以为其他变量，随意命名。
+                  scope:{
+                      msg:'@message',  //关联父级作用域的attr属性，@一直为字符串。
+                      colors:'&'   //关联父级作用域的方法，&表示方法
+                  },
+                  controller:['$scope',function($scope){
+                      console.log($scope.msg);
+                      $scope.changeColor = function(ev){
+                          var ev = ev.target;
+                          ev.style.border = "1px solid #fc5502";
+                          $scope.colors();
+//                          这里的colors()方法怎么父级关联呢，就要用到scope的&。因为在template中并没有定义colors()方法，那么如果有必要在父级中操作，就需要关联。不知道你有没有注意到，跟vue的子组件关联父组件很像。
+                      }
+
+                  }],
+//                  link:function(scope,element,attr){   //这里link里面的方法，等同于上面的scope对象@赋值。link更偏向的是dom操作。
+//                      scope.msg = attr.message;
+//                      scope.changeColor = function(ev){   //这里的方法，等同于上面controller中的方法。
+//                          var ev = ev.target;
+//                          ev.style.border = "1px solid #fc5502";
+//                          scope.change();
+//                          scope.$apply(attr.colors);
+//                      }
+//                  }
+            }
+       });
+
+
+       //专门为了测试scope中的'='
+       app.directive('msg',function(){
+           return {
+               restrict:'EA',
+               template:'<div ng-show="show">子级：{{text}}<input type="text" ng-model="text" /></div>',
+               replace:true,
+               scope:{
+                   text :'=childmsg',  //这里的=关键就在于关联父级作用域，在父级作用域中直接操作、赋值。常见于：点击事件出弹框、或者是操作数据的时候出提示框。
+                   show :'=showdata'
+               },
+               controller:['$scope',function($scope) {
+                  //这里的controller并不要什么操作，因为已经将子级中的变量全都关联到父级作用域了，那么可以直接在父级作用域中直接赋值操作。
+               }]
+
+           }
+       });
+
+   </script>
+</html>
