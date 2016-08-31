@@ -1,4 +1,6 @@
 
+这个domo主要是angular以及vue的基本用法，结合了webpack/gulp自动构建工具来完成一些案例。
+
 新增了用angular做的tab切换的案例：ng-tab.html
 
 新增了用angular做的根据子controller来判断切换到父controller的案例，PC端常见的页面上-左-右结构：ng-index.html
@@ -14,5 +16,7 @@
 @定义之后，绑定一个局部 scope 属性到当前 dom 节点的属性值。结果总是一个字符串，因为 dom 属性是字符串。关联父作用域的一个字符串，在自己的作用域controller中赋值。例如：name:'@text'，html中：<div text="我是案例"></div>
 =定义之后，通过 directive 的 attr 属性的值在局部 scope 的属性和父 scope 属性名之间建立双向绑定，在父作用域中赋值。自身的作用域controller几乎作用不到。
 &定义一个方法的关联。提供一种方式执行一个表达式在父 scope 的上下文中。如果没有指定 attr 名称，则属性名称为相同的本地名称。
+
+
 
 
